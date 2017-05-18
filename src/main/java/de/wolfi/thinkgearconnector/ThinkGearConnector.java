@@ -1,5 +1,9 @@
 package de.wolfi.thinkgearconnector;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import jdk.nashorn.internal.parser.JSONParser;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -11,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class ThinkGearConnector {
 
-
+    private Gson gson;
     class StreamThread extends Thread {
         Scanner reader;
         OutputStreamWriter writer;
@@ -43,6 +47,7 @@ public class ThinkGearConnector {
 
                 if(reader.hasNextLine()){
                     String in = reader.nextLine();
+
                     System.out.println(in);
                 }
             }
@@ -75,6 +80,7 @@ public class ThinkGearConnector {
     public ThinkGearConnector(String appName, String SHA_1) {
         this.appName = appName;
         this.sha_1 = SHA_1;
+        gson = new Gson();
     }
 
     public void open() throws IOException {
