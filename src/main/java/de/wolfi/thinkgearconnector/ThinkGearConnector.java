@@ -1,12 +1,12 @@
 package de.wolfi.thinkgearconnector;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import jdk.nashorn.internal.parser.JSONParser;
+import de.wolfi.thinkgearconnector.json.*;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,16 +15,27 @@ import java.util.logging.Logger;
  */
 public class ThinkGearConnector {
 
+
+
+
+    public interface EventListener{
+        public void processPacket(Packet in);
+    }
+
     private Gson gson;
+
+
+
     class StreamThread extends Thread {
-        Scanner reader;
+        private List<EventListener> listeners = new ArrayList<>();
+        BufferedReader reader;
         OutputStreamWriter writer;
         private Socket socket;
         boolean running = false;
         private StreamThread(Socket socket) {
             try {
                 this.socket = socket;
-                reader = new Scanner((socket.getInputStream()));
+                reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 writer = new OutputStreamWriter(socket.getOutputStream());
             } catch (Exception e) {
                 e.printStackTrace();
@@ -45,10 +56,24 @@ public class ThinkGearConnector {
 
 
 
-                if(reader.hasNextLine()){
-                    String in = reader.nextLine();
+                try {
+                    if(reader.ready()){
+                        String in = reader.readLine();
+                        if(in.isEmpty()) continue;
+                        System.out.println(in);
+                            Class<? extends Packet> clazz = null;
+                            if(in.contains("status")) clazz = StatusPacket.class;
+                            else if(in.contains("eSense")) clazz = ChannelPacket.class;
+                            else if(in.contains("blink")) clazz = BlinkPacket.class;
+                            else if(in.contains("raw")) clazz = RawPacket.class;
 
-                    System.out.println(in);
+                            Packet packet = gson.fromJson(in, clazz);
+                            listeners.forEach((p)->p.processPacket(packet));
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    continue;
                 }
             }
             try {
@@ -95,6 +120,10 @@ public class ThinkGearConnector {
     public void switchOutput(boolean enableRawOutput, String format){
         this.stream.writeJson(String.format("{\"enableRawOutput\":%s,\"format\":\"%s\"}\n",enableRawOutput,format));
     }
+    public void registerEventHandler(EventListener e) {
+        this.stream.listeners.add(e);
+    }
+
 
     public void close(){
         this.stream.close();

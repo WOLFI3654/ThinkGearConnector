@@ -1,8 +1,10 @@
 import de.wolfi.thinkgearconnector.ThinkGearConnector;
+import de.wolfi.thinkgearconnector.json.Packet;
 
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
 
 /**
  * Created by root on 16.05.2017.
@@ -16,7 +18,8 @@ public class ConnectorTestor {
             ThinkGearConnector connector = new ThinkGearConnector("Test Application", getSha("Test Application"));
             connector.open();
             connector.auth();
-            Thread.sleep(5000);
+            connector.registerEventHandler(packet->System.out.println(Collections.singletonList(packet.toHashMap())));
+            Thread.sleep(1000);
             connector.switchOutput(false,"Json");
             Thread.sleep(50000);
             connector.close();
