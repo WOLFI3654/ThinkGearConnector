@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ThinkgearConnector:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ThinkgearConnector_jar</output-path>
+    <root id="archive" name="ThinkgearConnector.jar">
+      <element id="module-output" name="ThinkgearConnector" />
+      <element id="module-test-output" name="ThinkgearConnector" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
