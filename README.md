@@ -23,16 +23,16 @@ Try it out!
 Step four:
 ```
 Submit bugs, add features and share peace
-´´´
+```
 
 
 ## Usage
 
 
 
-´´´
+```
 Empty. Pull requests welcome
-´´´
+```
 
 
 
@@ -56,18 +56,18 @@ Empty. Pull requests welcome
 
 
 
-´´´
+```
 Empty. Pull requests welcome
-´´´
+```
 
 
 
 ## Credits
 
 
-´´´
+```
 Empty. Pull requests welcome
-´´´
+```
 
 
 ## License
