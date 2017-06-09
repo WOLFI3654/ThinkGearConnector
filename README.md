@@ -1,4 +1,4 @@
-# ${1:Project Name}
+# Thinkgear Connector
 
 
 
