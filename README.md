@@ -9,19 +9,19 @@ This API can be used to receive packets over the [Neurosky ThinkGear Connector B
 ## Installation
 
 Step one: 
-´´´
+```
 Clone this repository
-´´´
+```
 Step two:
-´´´
+```
 Import as Maven project in any IDE you prefer
-´´´
+```
 Step three:
-´´´
+```
 Try it out!
-´´´
+```
 Step four:
-´´´
+```
 Submit bugs, add features and share peace
 ´´´
 
