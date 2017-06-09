@@ -1,6 +1,4 @@
-<snippet>
-
-  <content><![CDATA[
+<![CDATA[
 
 # ${1:Project Name}
 
@@ -78,8 +76,4 @@ Empty. Pull requests welcome
 
 Feel free to use it but please don't mark it as your own!
 
-]]></content>
-
-  <tabTrigger>readme</tabTrigger>
-
-</snippet>
+]]>
