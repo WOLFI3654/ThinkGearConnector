@@ -8,6 +8,11 @@ import java.util.HashMap;
 public class RawPacket implements Packet {
 
     private int rawEeg;
+
+    public int getRawEeg() {
+        return rawEeg;
+    }
+
     @Override
     public HashMap<String, Object> toHashMap() {
         HashMap<String,Object> map = new HashMap<>();

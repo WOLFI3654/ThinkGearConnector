@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class ThinkGearConnector {
 
 
-
+    private boolean debug = false;
 
     public interface EventListener{
         public void processPacket(Packet in);
@@ -60,7 +60,7 @@ public class ThinkGearConnector {
                     if(reader.ready()){
                         String in = reader.readLine();
                         if(in.isEmpty()) continue;
-                        System.out.println(in);
+                        if(debug)System.out.println(in);
                             Class<? extends Packet> clazz = null;
                             if(in.contains("status")) clazz = StatusPacket.class;
                             else if(in.contains("eSense")) clazz = ChannelPacket.class;
@@ -113,6 +113,9 @@ public class ThinkGearConnector {
         this.stream.start();
     }
 
+    public void enableDebug(){
+        debug = true;
+    }
     public void auth(){
         this.stream.writeJson(String.format("{\"appName\":\"%s\",\"appKey\":\"%s\"}\n",this.appName,this.sha_1));
     }

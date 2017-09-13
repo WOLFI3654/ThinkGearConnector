@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
+    <groupId>de.wolfi</groupId>
     <artifactId>ThinkgearConnector</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
@@ -21,10 +21,10 @@
     </build>
     <dependencies>
         <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>2.8.0</version>
-                <scope>compile</scope>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     

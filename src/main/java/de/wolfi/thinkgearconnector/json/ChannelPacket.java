@@ -11,6 +11,19 @@ public class ChannelPacket implements Packet{
     private EEGPowerPacket eegPower;
     private int poorSignalLevel;
 
+
+    public EEGPowerPacket getEegPower() {
+        return eegPower;
+    }
+
+    public ESensePacket geteSense() {
+        return eSense;
+    }
+
+    public int getPoorSignalLevel() {
+        return poorSignalLevel;
+    }
+
     @Override
     public String toString() {
         return eSense.toString() + eegPower.toString() + poorSignalLevel;
