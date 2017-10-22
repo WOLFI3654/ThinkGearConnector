@@ -100,16 +100,28 @@ public class ThinkGearConnector {
 
     }
 
-    private String appName, sha_1;
+    private String appName, sha_1, host;
+    private int port = 13854;
     private StreamThread stream;
     public ThinkGearConnector(String appName, String SHA_1) {
         this.appName = appName;
         this.sha_1 = SHA_1;
+        this.host = "127.0.0.1";
         gson = new Gson();
     }
 
+    public void setHost(String host){
+        this.setHost(host,this.port);    
+    }
+
+    public void setHost(String host, int port) {
+        this.host = host;
+        this.port = port;
+    }
+
+
     public void open() throws IOException {
-        this.stream = new StreamThread(new Socket("127.0.0.1",13854));
+        this.stream = new StreamThread(new Socket(this.host,this.port));
         this.stream.start();
     }
 
