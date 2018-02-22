@@ -9,15 +9,15 @@ This API can be used to receive packets over the [Neurosky ThinkGear Connector B
 
 Step one: 
 ```
-Clone this repository
+Goto the releases tab
 ```
 Step two:
 ```
-Import as Maven project in any IDE you prefer
+Download latest ThinkgearConnector-Release.jar.
 ```
 Step three:
 ```
-Try it out!
+Add the jar to your buildpath
 ```
 Step four:
 ```
