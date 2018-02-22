@@ -10,6 +10,17 @@ public class ESensePacket implements Packet{
     private int attention;
     private int meditation;
 
+
+    public ESensePacket setAttention(int attention) {
+        this.attention = attention;
+        return this;
+    }
+
+    public ESensePacket setMeditation(int meditation) {
+        this.meditation = meditation;
+        return this;
+    }
+
     public int getAttention() {
         return attention;
     }

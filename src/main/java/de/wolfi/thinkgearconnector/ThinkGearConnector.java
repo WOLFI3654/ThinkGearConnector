@@ -3,6 +3,9 @@ package de.wolfi.thinkgearconnector;
 import com.google.gson.Gson;
 import de.wolfi.thinkgearconnector.json.*;
 
+import javax.comm.CommPort;
+import javax.comm.CommPortIdentifier;
+import javax.comm.PortInUseException;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -27,11 +30,23 @@ public class ThinkGearConnector {
 
 
     class StreamThread extends Thread {
+        private CommPort port;
         private List<EventListener> listeners = new ArrayList<>();
         BufferedReader reader;
         OutputStreamWriter writer;
         private Socket socket;
         boolean running = false;
+
+        private StreamThread(CommPort port){
+            this.port = port;
+            try {
+                reader = new BufferedReader(new InputStreamReader(port.getInputStream()));
+                writer = new OutputStreamWriter(port.getOutputStream());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         private StreamThread(Socket socket) {
             try {
                 this.socket = socket;
@@ -45,7 +60,8 @@ public class ThinkGearConnector {
         @Override
         public void run() {
             this.running = true;
-            while(this.running){
+            if(!hacked)
+                while(this.running){
                 if(socket.isClosed()){
                     try {
                         throw new InvalidObjectException("Socket is closed");
@@ -69,6 +85,25 @@ public class ThinkGearConnector {
 
                             Packet packet = gson.fromJson(in, clazz);
                             listeners.forEach((p)->p.processPacket(packet));
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    continue;
+                }
+            }
+            else while(this.running){
+                try {
+                    if(reader.ready()){
+                        String in = reader.readLine();
+                        if(in.isEmpty()) continue;
+                        if(debug)System.out.println(in);
+                        String[] data = in.split(",");
+                        ESensePacket sense = new ESensePacket();
+                        sense.setAttention(Integer.valueOf(data[1])).setMeditation(Integer.valueOf(data[2]));
+                        EEGPowerPacket power = new EEGPowerPacket();
+                        power.setDelta(Long.valueOf(data[3])).setTheta(Long.parseLong(data[4])).setLowAlpha(Long.parseLong(data[5])).setHighAlpha(Long.parseLong(data[6])).setLowBeta(Long.parseLong(data[7])).setHighBeta(Long.parseLong(data[8])).setLowGamma(Long.parseLong(data[9])).setHighGamma(Long.parseLong(data[10]));
+                        listeners.forEach((p)->new ChannelPacket().setEegPower(power).seteSense(sense).setPoorSignalLevel(Integer.parseInt(data[0])));
 
                     }
                 } catch (Exception e) {
@@ -103,6 +138,15 @@ public class ThinkGearConnector {
     private String appName, sha_1, host;
     private int port = 13854;
     private StreamThread stream;
+
+    private CommPortIdentifier cport;
+    private boolean hacked = false;
+    public ThinkGearConnector(CommPortIdentifier port){
+        this.hacked = true;
+        this.cport = port;
+        gson = new Gson();
+
+    }
     public ThinkGearConnector(String appName, String SHA_1) {
         this.appName = appName;
         this.sha_1 = SHA_1;
@@ -120,9 +164,15 @@ public class ThinkGearConnector {
     }
 
 
-    public void open() throws IOException {
-        this.stream = new StreamThread(new Socket(this.host,this.port));
+    public void open() throws IOException, PortInUseException {
+        if(!hacked)
+            this.stream = new StreamThread(new Socket(this.host,this.port));
+        else
+            this.stream = new StreamThread(cport.open("ThinkGaerConnectorBridge",1000));
+
+
         this.stream.start();
+
     }
 
     public void enableDebug(){

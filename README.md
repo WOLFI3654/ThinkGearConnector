@@ -1,7 +1,6 @@
 # Thinkgear Connector
 
 
-
 This API can be used to receive packets over the [Neurosky ThinkGear Connector Bridge](http://developer.neurosky.com/docs/doku.php?id=thinkgear_connector_tgc)
 
 
@@ -29,11 +28,21 @@ Submit bugs, add features and share peace
 ## Usage
 
 
-
 ```
 Empty. Pull requests welcome
 ```
 
+## TODO
+
+- [ ] Add binary support
+
+- [ ] Reoptimize packet handling
+
+- [ ] Add native connection (without ThinkgearConnector)
+
+- [ ] Add a JavaDoc
+
+- [ ] Update the [README.MD](README.MD)
 
 
 ## Contributing
