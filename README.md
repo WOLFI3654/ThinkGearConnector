@@ -29,11 +29,21 @@ Submit bugs, add features and share peace
 ## Usage
 
 
-
 ```
 Empty. Pull requests welcome
 ```
 
+## TODO
+
+[ ] Add binary support
+
+[ ] Reoptimize packet handling
+
+[ ] Add native connection (without ThinkgearConnector)
+
+[ ] Add a JavaDoc
+
+[ ] Update the [README.MD](README.MD)
 
 
 ## Contributing
