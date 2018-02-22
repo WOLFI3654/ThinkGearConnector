@@ -3,9 +3,7 @@ package de.wolfi.thinkgearconnector;
 import com.google.gson.Gson;
 import de.wolfi.thinkgearconnector.json.*;
 
-import javax.comm.CommPort;
-import javax.comm.CommPortIdentifier;
-import javax.comm.PortInUseException;
+import gnu.io.*;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
