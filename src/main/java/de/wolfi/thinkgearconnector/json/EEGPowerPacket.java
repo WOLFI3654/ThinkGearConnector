@@ -9,6 +9,47 @@ public class EEGPowerPacket implements  Packet{
 
     private long delta,theta,lowAlpha,highAlpha,lowBeta,highBeta,lowGamma,highGamma;
 
+
+    public EEGPowerPacket setDelta(long delta) {
+        this.delta = delta;        return this;
+
+    }
+
+    public EEGPowerPacket setTheta(long theta) {
+        this.theta = theta;        return this;
+
+    }
+
+    public EEGPowerPacket setLowAlpha(long lowAlpha) {
+        this.lowAlpha = lowAlpha;        return this;
+
+    }
+
+    public EEGPowerPacket setHighAlpha(long highAlpha) {
+        this.highAlpha = highAlpha;        return this;
+
+    }
+
+    public EEGPowerPacket setLowBeta(long lowBeta) {
+        this.lowBeta = lowBeta;        return this;
+
+    }
+
+    public EEGPowerPacket setHighBeta(long highBeta) {
+        this.highBeta = highBeta;        return this;
+
+    }
+
+    public EEGPowerPacket setLowGamma(long lowGamma) {
+        this.lowGamma = lowGamma;        return this;
+
+    }
+
+    public EEGPowerPacket setHighGamma(long highGamma) {
+        this.highGamma = highGamma;
+        return this;
+    }
+
     public long getDelta() {
         return delta;
     }

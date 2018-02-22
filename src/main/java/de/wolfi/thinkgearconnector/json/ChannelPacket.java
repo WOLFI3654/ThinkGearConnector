@@ -12,6 +12,21 @@ public class ChannelPacket implements Packet{
     private int poorSignalLevel;
 
 
+    public ChannelPacket setEegPower(EEGPowerPacket eegPower) {
+        this.eegPower = eegPower;
+        return this;
+    }
+
+    public ChannelPacket seteSense(ESensePacket eSense) {
+        this.eSense = eSense;
+        return this;
+    }
+
+    public ChannelPacket setPoorSignalLevel(int poorSignalLevel) {
+        this.poorSignalLevel = poorSignalLevel;
+        return this;
+    }
+
     public EEGPowerPacket getEegPower() {
         return eegPower;
     }
