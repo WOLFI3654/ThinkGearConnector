@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ThinkGearConnector" />
         <module name="ThinkgearConnector" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ThinkGearConnector" target="1.8" />
       <module name="ThinkgearConnector" target="1.8" />
     </bytecodeTargetLevel>
   </component>
