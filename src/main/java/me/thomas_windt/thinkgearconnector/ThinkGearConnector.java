@@ -33,6 +33,11 @@ public class ThinkGearConnector {
     private CommPortIdentifier cport;
     private boolean hacked = false;
 
+    /**
+     * Used for hacked MindFlex headsets
+     * @param port The CommPort of the connected arduino
+     */
+
     public ThinkGearConnector(CommPortIdentifier port) {
         this.hacked = true;
         this.cport = port;
@@ -40,6 +45,11 @@ public class ThinkGearConnector {
 
     }
 
+    /**
+     * Connect to the ThinkGearConnector application from NeuroSky
+     * @param appName Your Application name
+     * @param SHA_1 the hash of your app name - must be unique
+     */
     public ThinkGearConnector(String appName, String SHA_1) {
         this.appName = appName;
         this.sha_1 = SHA_1;
@@ -47,52 +57,95 @@ public class ThinkGearConnector {
         gson = new Gson();
     }
 
-    public ThinkGearConnector(String address) {
+
+    /**
+     * WIP - Will currently not work
+     * @param address
+     */
+    private ThinkGearConnector(String address) {
         this.address = address;
         gson = new Gson();
     }
 
+    /**
+     * Reset the host
+     * @param host the host
+     */
     public void setHost(String host) {
         this.setHost(host, this.port);
     }
 
+    /**
+     * Reset the host
+     * @param host the host
+     * @param port the port
+     */
     public void setHost(String host, int port) {
         this.host = host;
         this.port = port;
     }
 
+    /**
+     * Opens the connection
+     * @throws IOException
+     * @throws PortInUseException
+     */
     public void open() throws IOException, PortInUseException {
         if (!hacked)
             this.stream = new StreamThread(new Socket(this.host, this.port));
-        else
-            this.stream = new StreamThread(cport.open("ThinkGaerConnectorBridge", 1000));
+        else if (address != null)
+            this.stream = new StreamThread((StreamConnection) null); ///TODO ADD BLUETOOTH SUPPORT
+        else this.stream = new StreamThread(cport.open("ThinkGaerConnectorBridge", 1000));
 
 
         this.stream.start();
 
     }
 
+    /**
+     * prints debug information to the console
+     */
     public void enableDebug() {
         debug = true;
     }
 
+    /**
+     * authenticate with the ThinkGearConnector from NeuroSky
+     */
     public void auth() {
         this.stream.writeJson(String.format("{\"appName\":\"%s\",\"appKey\":\"%s\"}\n", this.appName, this.sha_1));
     }
 
+    /**
+     *
+     * @param enableRawOutput should raw data be send?
+     * @param format use 'json' to receive json data
+     */
     public void switchOutput(boolean enableRawOutput, String format) {
         this.stream.writeJson(String.format("{\"enableRawOutput\":%s,\"format\":\"%s\"}\n", enableRawOutput, format));
     }
 
+    /**
+     * Registers an event handler for incomming packets
+     * @param e the event handler to be registered
+     */
     public void registerEventHandler(EventListener e) {
         this.stream.listeners.add(e);
     }
 
+
+    /**
+     * Close the Connection
+     */
     public void close() {
         this.stream.close();
     }
 
     public interface EventListener {
+        /**
+         * Process incomming packets
+         * @param in Incomming packet
+         */
         public void processPacket(Packet in);
     }
 
@@ -201,20 +254,20 @@ public class ThinkGearConnector {
                                     for (int i = 0; i < payloadLength; i++) {    // Parse the payload
 
                                         switch (payloadData[i]) {
-                                            case (byte)1:
+                                            case (byte) 1:
                                                 i++;
 
                                                 break;
-                                            case (byte)2:
+                                            case (byte) 2:
                                                 i++;
                                                 poorQuality = payloadData[i];
                                                 bigPacket = true;
                                                 break;
-                                            case (byte)4:
+                                            case (byte) 4:
                                                 i++;
                                                 attention = payloadData[i];
                                                 break;
-                                            case (byte)5:
+                                            case (byte) 5:
                                                 i++;
                                                 meditation = payloadData[i];
                                                 break;
