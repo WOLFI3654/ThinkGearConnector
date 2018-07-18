@@ -7,23 +7,17 @@ This API can be used to receive packets over the [Neurosky ThinkGear Connector B
 
 ## Installation
 
-Step one: 
-```
-Goto the releases tab
-```
-Step two:
-```
-Download latest ThinkgearConnector-Release.jar.
-```
-Step three:
-```
-Add the jar to your buildpath
-```
-Step four:
-```
-Submit bugs, add features and share peace
+Installation is currently supported via maven
+
+```maven
+<dependency>
+  <groupId>me.thomas-windt</groupId>
+  <artifactId>thinkgearconnector</artifactId>
+  <version>1.0-Release</version>
+</dependency>
 ```
 
+If you don't want to use maven you can try a release under the release tab or clone the repository and build the API on your own.
 
 ## Usage
 
