@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.wolfi</groupId>
-    <artifactId>ThinkgearConnector</artifactId>
-    <version>1.0-Release</version>
+    <groupId>me.thomas-windt</groupId>
+    <artifactId>thinkgearconnector</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <name>ThinkgearConnector - Java</name>
-    <description>This API allowes you to use the ThinkgearConnector Bridge provided by NeuroSky for Windows/Mac</description>
+    <description>This API allowes you to use the MindWaveMobile EEG headset by NeuroSky with the ThinkGearConnector bridge for Windows/Mac or access it directly via bluetooth. You can also use a hacked MindFlex game with an arduino to gather data.</description>
     <url>https://github.com/WOLFI3654/ThinkGearConnector</url>
 
     <packaging>jar</packaging>
@@ -25,7 +25,7 @@
     <developers>
         <developer>
             <name>Thomas Windt</name>
-            <email>thomas@architekt-windt.de</email>
+            <email>info@thomas-windt.me</email>
         </developer>
     </developers>
     <scm>
@@ -43,13 +43,7 @@
 
         </snapshotRepository>
 
-        <repository>
 
-            <id>ossrh</id>
-
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-
-        </repository>
 
     </distributionManagement>
     <build>
@@ -69,13 +63,14 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.0</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>org.rxtx</groupId>
             <artifactId>rxtx</artifactId>
             <version>2.1.7</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     

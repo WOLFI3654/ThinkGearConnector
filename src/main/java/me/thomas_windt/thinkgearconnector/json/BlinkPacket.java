@@ -1,4 +1,4 @@
-package de.wolfi.thinkgearconnector.json;
+package me.thomas_windt.thinkgearconnector.json;
 
 import java.util.HashMap;
 

@@ -1,9 +1,10 @@
-package de.wolfi.thinkgearconnector;
+package me.thomas_windt.thinkgearconnector;
 
 import com.google.gson.Gson;
-import de.wolfi.thinkgearconnector.json.*;
 
 import gnu.io.*;
+import me.thomas_windt.thinkgearconnector.json.*;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;

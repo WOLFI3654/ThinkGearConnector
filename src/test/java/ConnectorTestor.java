@@ -1,5 +1,5 @@
-import de.wolfi.thinkgearconnector.ThinkGearConnector;
-import de.wolfi.thinkgearconnector.json.Packet;
+import me.thomas_windt.thinkgearconnector.ThinkGearConnector;
+import gnu.io.PortInUseException;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -16,7 +16,11 @@ public class ConnectorTestor {
 
         try {
             ThinkGearConnector connector = new ThinkGearConnector("Test Application", getSha("Test Application"));
-            connector.open();
+            try {
+                connector.open();
+            } catch (PortInUseException e) {
+                e.printStackTrace();
+            }
             connector.auth();
             connector.registerEventHandler(packet->System.out.println(Collections.singletonList(packet.toHashMap())));
             Thread.sleep(1000);
